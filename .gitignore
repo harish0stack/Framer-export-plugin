@@ -6,6 +6,7 @@
 /.pnp
 .pnp.js
 .yarn
+server/node_modules/
 
 # misc
 
@@ -17,7 +18,7 @@
 my-plugin
 dev-plugin
 dist
-
+server/jobs/
 # debug
 
 npm-debug.log*

@@ -1,10 +1,226 @@
-/* Your Plugin CSS */
+/* ── Reset & Tokens ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-main {
+:root {
+  --bg:       #111;
+  --bg2:      #1a1a1a;
+  --bg3:      #222;
+  --border:   #2a2a2a;
+  --border2:  #333;
+  --t1:       #fff;
+  --t2:       #a1a1aa;
+  --t3:       #52525b;
+  --accent:   #6366f1;
+  --accent-h: #818cf8;
+  --accent-d: rgba(99,102,241,.15);
+  --green:    #22c55e;
+  --green-d:  rgba(34,197,94,.12);
+  --amber:    #f59e0b;
+  --red:      #ef4444;
+  --red-d:    rgba(239,68,68,.12);
+  --r:        7px;
+  --r-sm:     5px;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
+html, body, #root { height: 100%; overflow: hidden; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  background: var(--bg);
+  color: var(--t1);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* ── Root layout ────────────────────────────────────────────────────────── */
+.root {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  padding: 0 15px 15px 15px;
   height: 100%;
-  gap: 15px;
+  overflow: hidden;
 }
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.header-icon {
+  width: 28px; height: 28px;
+  background: var(--accent-d);
+  border-radius: 6px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.header-title { font-size: 13px; font-weight: 600; }
+.header-sub   { font-size: 11px; color: var(--t3); }
+.header-badge {
+  margin-left: auto;
+  font-size: 10px; font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--green-d);
+  color: var(--green);
+}
+.header-badge.err { background: var(--red-d); color: var(--red); }
+
+/* ── Body (scrollable) ──────────────────────────────────────────────────── */
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Field ──────────────────────────────────────────────────────────────── */
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field-label { font-size: 11px; font-weight: 500; color: var(--t2); }
+.field-label span { color: var(--accent); }
+.field-hint  { font-size: 10px; color: var(--t3); }
+
+.field-input {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--r-sm);
+  color: var(--t1);
+  font-size: 12px;
+  padding: 6px 9px;
+  width: 100%;
+  outline: none;
+  transition: border-color .15s;
+}
+.field-input::placeholder { color: var(--t3); }
+.field-input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-d); }
+.field-input:disabled { opacity: .4; pointer-events: none; }
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 7px 12px;
+  border-radius: var(--r);
+  font-size: 12px; font-weight: 600;
+  border: none; cursor: pointer;
+  transition: all .15s;
+  width: 100%;
+}
+.btn:disabled { opacity: .4; pointer-events: none; }
+
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-h); }
+
+.btn-secondary { background: var(--bg3); color: var(--t1); border: 1px solid var(--border2); }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn-ghost { background: transparent; color: var(--t2); font-size: 11px; font-weight: 500; padding: 5px 0; width: auto; }
+.btn-ghost:hover { color: var(--t1); }
+
+/* ── Spinner ────────────────────────────────────────────────────────────── */
+.spinner {
+  width: 12px; height: 12px;
+  border: 2px solid rgba(255,255,255,.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Stats row ──────────────────────────────────────────────────────────── */
+.stats {
+  display: flex;
+  gap: 6px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 10px 12px;
+}
+.stat { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1px; }
+.stat-num { font-size: 18px; font-weight: 700; }
+.stat-lbl { font-size: 10px; color: var(--t3); }
+.stat-divider { width: 1px; background: var(--border2); }
+
+/* ── Component list ─────────────────────────────────────────────────────── */
+.comp-list {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  max-height: 180px;
+  overflow-y: auto;
+}
+.comp-row {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.comp-row:last-child { border-bottom: none; }
+.comp-name { flex: 1; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.comp-url-ok  { font-size: 10px; color: var(--green); font-weight: 600; }
+.comp-url-no  { font-size: 10px; color: var(--t3); }
+.comp-more { text-align: center; font-size: 10px; color: var(--t3); padding: 5px; border-top: 1px solid var(--border); }
+
+.tag {
+  font-size: 9px; font-weight: 700;
+  padding: 1px 5px; border-radius: 3px;
+  text-transform: uppercase; white-space: nowrap;
+}
+.tag-code     { background: var(--accent-d); color: var(--accent); }
+.tag-component{ background: var(--green-d); color: var(--green); }
+.tag-instance { background: rgba(245,158,11,.12); color: var(--amber); }
+
+/* ── Progress ───────────────────────────────────────────────────────────── */
+.progress-wrap { display: flex; flex-direction: column; gap: 5px; }
+.progress-track { height: 3px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+.progress-fill {
+  height: 100%; background: var(--accent);
+  border-radius: 2px;
+  transition: width .4s ease;
+}
+.progress-label { font-size: 10px; color: var(--t3); }
+
+/* ── Log box ────────────────────────────────────────────────────────────── */
+.log {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 8px 10px;
+  max-height: 130px;
+  overflow-y: auto;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.log-line { font-size: 10px; color: var(--t2); font-family: 'SF Mono', 'Menlo', monospace; }
+.log-line:last-child { color: var(--t1); }
+
+/* ── Error ──────────────────────────────────────────────────────────────── */
+.error-box {
+  background: var(--red-d);
+  border: 1px solid rgba(239,68,68,.25);
+  border-radius: var(--r);
+  padding: 8px 10px;
+  font-size: 11px; color: var(--red);
+  display: flex; gap: 6px; align-items: flex-start;
+}
+
+/* ── Separator ──────────────────────────────────────────────────────────── */
+.sep { height: 1px; background: var(--border); margin: 2px 0; }
+
+/* ── Download success ───────────────────────────────────────────────────── */
+.success-box {
+  background: var(--green-d);
+  border: 1px solid rgba(34,197,94,.2);
+  border-radius: var(--r);
+  padding: 10px 12px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.success-title { font-size: 12px; font-weight: 600; color: var(--green); }
+.success-sub   { font-size: 10px; color: var(--t2); }
