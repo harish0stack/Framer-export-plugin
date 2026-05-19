@@ -92,28 +92,30 @@ Week 3-4: Generate TypeScript type files (.d.ts)
 | Type safety | No IDE support | Generate .d.ts | ⭐ NEXT |
 
 ## SET UP
-
+### **clone the repo **
+git clone https://github.com/harish0stack/Framer-export-plugin
+cd Framer-export-plugin
 ### **Step 1: Setup the Backend Server (The Extractor)**
 
 1. Open a terminal and navigate to the server folder:
     
     ```
     bash
-    cdframer-export/server
+    cd server
     ```
     
 2. Install dependencies (This automatically downloads Playwright, ESBuild, and the Chromium browsers for their specific OS):
     
     ```
     bash
-    npminstall
+    npm install
     ```
     
 3. Start the server:*(The server is now running on `localhost:4000`)*
     
     ```
     bash
-    npmrundev
+    npm run dev
     ```
     
 
@@ -125,21 +127,21 @@ Week 3-4: Generate TypeScript type files (.d.ts)
     
     ```
     bash
-    cdframer-export
+    cd Framer-export-plugin or cd ..(to go back in the root folder)
     ```
     
 2. Install frontend dependencies:
     
     ```
     bash
-    npminstall
+    npm install
     ```
     
 3. Start the frontend interface:*(The UI is now running on `localhost:5173`)*
     
     ```
     bash
-    npmrundev
+    npm run dev
     ```
     
 
