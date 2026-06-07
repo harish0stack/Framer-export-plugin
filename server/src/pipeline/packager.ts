@@ -115,7 +115,7 @@ function buildMainTsx(): string {
 import { createRoot } from "react-dom/client"
 import App from "./App"
 
-createRoot(document.getElementById("root")!).render(<App />)
+createRoot(document.getElementById("main")!).render(<App />)
 `
 }
 
@@ -207,7 +207,7 @@ function buildIndexHtml(projectName: string): string {
     <title>${projectName}</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="main"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
